@@ -14,16 +14,27 @@ const About = () => {
   // const [color] = useState(0)
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
+  const { first, second } = state;
   const handleChange = (event) => {
 
     setState({
       ...state,
       [event.target.name]: event.target.checked,
     });
-    changeColor("blue");
+
   };
 
-  const { first, second } = state;
+  useEffect(() => {
+    if (state.first && state.second) {
+      changeColor('green');
+    }else if(state.first){
+      changeColor('red')
+    } else if (state.second){
+      changeColor('yellow'); 
+    } else{
+      changeColor('blue'); 
+    }
+  }, [state.first, state.second]); 
 
 const Checkboxes = () =>  {
   return (
